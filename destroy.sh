@@ -110,6 +110,42 @@ do
 		fi
 	fi
 
+	if [[ $resource == "vpce" ]]; then
+		vpce_ids=($(aws ec2 --region=$region describe-vpc-endpoints --query "VpcEndpoints[].VpcEndpointId" --output text))
+		if [ -z "$vpce_ids" ]; then
+			echo -e "Nenhuma ${resource} para remover em ${region}"  
+		else
+			for vpce_id in "${vpce_ids[@]}"
+			do
+				echo -e "Removendo ${resource} em ${region}"
+				result=$(aws ec2 --region=$region delete-vpc-endpoints --vpc-endpoint-ids $vpce_id 2>&1)
+				if [ -z "$result" ]; then
+					echo -e "${resource} removida com sucesso em ${region}"
+				else
+					echo "${resource} não removido. Erro: ${result}"
+				fi
+			done
+		fi
+	fi
+
+	if [[ $resource == "dopt" ]]; then
+		dopt_ids=($(aws ec2 --region=$region describe-dhcp-options --query "DhcpOptions[].DhcpOptionsId" --output text))
+		if [ -z "$dopt_ids" ]; then
+			echo -e "Nenhuma ${resource} para remover em ${region}"  
+		else
+			for dopt_id in "${dopt_ids[@]}"
+			do
+				echo -e "Removendo ${resource} em ${region}"
+				result=$(aws ec2 --region=$region delete-dhcp-options --dhcp-options-id $dopt_id 2>&1)
+				if [ -z "$result" ]; then
+					echo -e "${resource} removida com sucesso em ${region}"
+				else
+					echo "${resource} não removido. Erro: ${result}"
+				fi
+			done
+		fi
+	fi
+
 	if [[ $resource == "igw" ]]; then
 		igw_ids=($(aws ec2 --region=$region describe-internet-gateways --query "InternetGateways[].[InternetGatewayId]" --output text))
 		vpc_ids=($(aws ec2 --region=$region describe-internet-gateways --query "InternetGateways[].[Attachments[].VpcId]" --output text))
