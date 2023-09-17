@@ -6,7 +6,9 @@ Com certeza dá pra melhorar bastante, mas já quebrou um galho.
 Antes de executar, coloque no arquivo regions.txt as regiões que deseja buscar e apagar os recursos.
 As regiões devem ser adicionadas uma abaixo da outra.
 Por exemplo:
+
 us-east-1
+
 sa-east-1
 
 Para executar o script, primeiro conseda permissão de execução:
