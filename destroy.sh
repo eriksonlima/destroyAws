@@ -1,7 +1,5 @@
 #!/bin/bash
 
-resource=$1
-
 echo "Escolha o recurso que deseja deletar:"
 echo "1. EC2"
 echo "2. VPC"
