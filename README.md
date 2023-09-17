@@ -1,5 +1,5 @@
 # destroyAws
-O script destroy.sh foi criado após uma invasão de conta AWS onde vários recursos foram criados pelo ivasor em várias regiões diferentes.
+O script destroy.sh foi criado após uma invasão de conta AWS onde vários recursos foram criados pelo invasor em várias regiões diferentes.
 Para agilizar o processo de destruição e cortar os custos que seriam gerados, resolvi automatizar o processo.
 Com certeza dá pra melhorar bastante, mas já quebrou um galho.
 
