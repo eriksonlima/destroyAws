@@ -19,6 +19,6 @@ Depois execute:
 ```
 ./destroy.sh
 ```
-Um menu com opções de recursos irá abrir. Escolha uma e o script irá buscar o recursos existentes e apagar automaticamente.
+Um menu com opções de recursos irá abrir. Escolha uma e o script irá buscar os recursos existentes e apagar automaticamente.
 
 É necessário que o aws cli esteja com o profile da conta configurado.
