@@ -11,7 +11,7 @@ us-east-1
 sa-east-1
 ```
 
-Para executar o script, primeiro conseda permissão de execução:
+Para executar o script, primeiro conceda permissão de execução:
 ```
 chmod +x destroy.sh
 ```
@@ -19,6 +19,6 @@ Depois execute:
 ```
 ./destroy.sh
 ```
-Um menu com opções de recursos irão abrir. Escolha uma e o script irá buscar o recursos existentes e apagar automaticamente.
+Um menu com opções de recursos irá abrir. Escolha uma e o script irá buscar o recursos existentes e apagar automaticamente.
 
 É necessário que o aws cli esteja com o profile da conta configurado.
