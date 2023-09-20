@@ -10,6 +10,8 @@ echo "6. NACL"
 echo "7. RTB"
 echo "8. DOPT"
 echo "9. VPCE"
+echo "10. NETINT"
+echo "11. NGW"
 echo "0. SAIR"
 read opcao
 
@@ -204,6 +206,46 @@ case $opcao in
 					fi
 				done
 			fi
+		done < regions.txt
+		;;
+	10)
+		while read -r region
+		do
+			netint_ids=($(aws ec2 --region=$region describe-network-interfaces --query "NetworkInterfaces[].NetworkInterfaceId" --output text))
+			if [ -z "$netint_ids" ]; then
+				echo -e "Nenhuma NETINT para remover em ${region}"  
+			else
+				for netint_id in "${netint_ids[@]}"
+				do
+					echo -e "Removendo NETINT em ${region}"
+					result=$(aws ec2 --region=$region delete-network-interface --network-interface-id $netint_id 2>&1)
+					if [ -z "$result" ]; then
+						echo -e "NETINT removida com sucesso em ${region}"
+					else
+						echo "NETINT não removido. Erro: ${result}"
+					fi
+				done
+			fi	
+		done < regions.txt
+		;;
+	11)
+		while read -r region
+		do
+			ngw_ids=($(aws ec2 --region=$region describe-nat-gateways --query "NatGateways[].NatGatewayId" --output text))
+			if [ -z "$ngw_ids" ]; then
+				echo -e "Nenhuma NGW para remover em ${region}"  
+			else
+				for ngw_id in "${ngw_ids[@]}"
+				do
+					echo -e "Removendo NGW em ${region}"
+					result=$(aws ec2 --region=$region delete-nat-gateway --nat-gateway-id $ngw_id 2>&1)
+					if [ -z "$result" ]; then
+						echo -e "NGW removida com sucesso em ${region}"
+					else
+						echo "NGW não removido. Erro: ${result}"
+					fi
+				done
+			fi	
 		done < regions.txt
 		;;
 	0)
